@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn.metrics import accuracy_score
-import scipy
 
 class Neuron():
     def __init__(self):
@@ -12,9 +11,9 @@ class Neuron():
         s = 1 / (1 + np.exp(-z))
         return s
 
-    def initialize_with_zeros(self, dim):
+    def initialize_weights_and_b(self, dim):
 
-        w = np.zeros(shape=(dim,1))
+        w = np.random.randn(dim,1) * 0.01
         b = 0
 
         return w,b
@@ -85,7 +84,7 @@ class Neuron():
 
     def fit(self, X_train, Y_train, num_iterations=2000, learning_rate=0.5, print_cost=False):
 
-        w, b = self.initialize_with_zeros(X_train.shape[0])
+        w, b = self.initialize_weights_and_b(X_train.shape[0])
 
         parameters, grads, costs = self.update_parameters(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost)
 
